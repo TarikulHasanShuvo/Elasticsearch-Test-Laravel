@@ -14,6 +14,7 @@ class UsersExport implements ToCollection
 
     public function collection(Collection $rows)
     {
+
          $rows->take(500)->each(function ($row) {
             User::create([
                 'name' => $row[1],
@@ -21,7 +22,9 @@ class UsersExport implements ToCollection
                 'password' => bcrypt('password'),
             ]);
         });
-
+         if (Storage::exists('users.xlsx')) {
+             unlink(storage_path('app/users.xlsx'));
+        }
         Excel::store(new UsersChunkExport($rows->skip(500)), 'users.xlsx');
 
 //        $file_name = 'users.xlsx';
