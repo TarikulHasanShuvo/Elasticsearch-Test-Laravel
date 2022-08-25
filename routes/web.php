@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExcelTestingController;
 use App\Http\Controllers\TestingController;
 use App\Models\Article;
 use Elasticsearch\ClientBuilder;
@@ -29,4 +30,7 @@ Route::get('/test',[TestingController::class,'search']);
 Route::get('/save', [TestingController::class,'save']);
 
 Route::get('/find/{id}', [TestingController::class,'find']);
+
+
+Route::get('/excel', [ExcelTestingController::class,'index']);
 
